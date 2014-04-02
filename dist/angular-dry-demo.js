@@ -38,9 +38,10 @@ angular.module('dryDemo').directive('dryDemo', ['$compile', 'dryDemoBlocks', fun
     priority: 9001, // It's over 9000!
     compile: function(element, attrs) {
       var blockId = attrs.dryDemo
+        , html = element.html()
         , linkFn = $compile(element, null, 9001);
 
-      dryDemoBlocks.set(blockId, element.html());
+      dryDemoBlocks.set(blockId, html);
 
       var postLink = function(scope) {
         linkFn(scope);
