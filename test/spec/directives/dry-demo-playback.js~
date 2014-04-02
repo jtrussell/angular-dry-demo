@@ -1,0 +1,41 @@
+/*global angular, describe, it, beforeEach, module, inject, expect */
+
+describe('Directive: dryDemoPlayback', function() {
+  'use strict';
+
+  var scope, compile;
+
+  beforeEach(module('dryDemo'));
+
+  beforeEach(inject(function($rootScope, $compile) {
+    scope = $rootScope.$new;
+    compile = function(tpl, scp) {
+      var $el = $compile(angular.element(tpl))(scp);
+      return $el;
+    };
+  }));
+
+  var mkEl = function(arr, scp) {
+    return compile(arr.join('\n'), scp || scope);
+  };
+
+  describe('basics', function() {
+    var $el;
+
+    beforeEach(function() {
+      $el = mkEl([
+        '<div>',
+          '<div dry-demo="first">',
+            '<p>This is some code!</p>',
+          '</div>',
+          '<div dry-demo-playback="first"></div>',
+        '</div>'
+      ]);
+    });
+    
+    it('should fill the display container with formatted code', function() {
+      expect($el.children().eq(1).find('code').find('pre').html()).toBe('&lt;p&gt;This is some code!&lt;/p&gt;');
+    });
+
+  });
+});
