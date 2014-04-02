@@ -30,22 +30,23 @@ angular.module('dryDemo').directive('dryDemoPlayback', ['$filter', '$compile', '
 
 /*global angular */
 
-angular.module('dryDemo').directive('dryDemo', ['dryDemoBlocks', function(dryDemoBlocks) {
+angular.module('dryDemo').directive('dryDemo', ['$compile', 'dryDemoBlocks', function($compile, dryDemoBlocks) {
   'use strict';
   return {
     restrict: 'A',
-    // compile: function(tElement, tAttrs, transclude) {
-    //   return {
-    //     pre: function(scope, element, attrs) {
-    //       // tElement.html() still has <!-- 
-    //     }
-    //   };
-    // }
-    link: {
-      pre: function(scope, element, attrs) {
-        var blockId = attrs.dryDemo;
-        dryDemoBlocks.set(blockId, element.html());
-      }
+    terminal: true,
+    priority: 9001, // It's over 9000!
+    compile: function(element, attrs) {
+      var blockId = attrs.dryDemo
+        , linkFn = $compile(element, null, 9001);
+
+      dryDemoBlocks.set(blockId, element.html());
+
+      var postLink = function(scope) {
+        linkFn(scope);
+      };
+
+      return postLink;
     }
   };
 }]);
