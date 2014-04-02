@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css">
+  </head>
+  <body ng-app="demoApp">
+
+    <div class="container">
+      <h1>Hello World!</h1>
+
+      <h2>Angular Can Add</h2>
+      <div dry-demo="first">
+        <p>
+          1 + 1 = {{1+1}}
+        </p>
+      </div>
+
+      <h3>Here's the Code</h3>
+      <div dry-demo-playback="first"></div>
+
+      <h2>Angular Can Loop</h2>
+
+      <div dry-demo="second">
+        <ul ng-controller="MainCtrl as main" >
+          <li ng-repeat="item in main.bag">
+            {{item}}
+          </li>
+        </ul>
+      </div>
+
+      <h3>Here's the Code</h3>
+      <div dry-demo-playback="second"></div>
+    </div>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.js" type="text/javascript" charset="utf-8"></script>
+    <script src="bower_components/angular-dry-demo/dist/angular-dry-demo.js" type="text/javascript" charset="utf-8"></script>
+    <script src="main.js" type="text/javascript" charset="utf-8"></script>
+  </body>
+</html>
