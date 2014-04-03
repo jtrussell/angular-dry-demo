@@ -5,4 +5,5 @@ angular.module('demoApp', ['dryDemo']);
 angular.module('demoApp').controller('MainCtrl', function() {
   'use strict';
   this.bag = ['one', 'two', 'three'];
+  this.now = (new Date()).getTime();
 });
